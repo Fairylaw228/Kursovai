@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <meta charset="UTF-8">
+    <title>Машины на стоянке</title>
+</head>
+<body>
+
+<h1>Добавление студента в университет</h1>
+<hr>
+<a href="/blog/carmain/car-park/car-park-add" style="font-size: 20px">Переход к добавлению</a>
+<hr>
+<div th:each="el : ${cars}">
+    <hr>
+    <h3 th:text="${'Наименование: '+el.getNamecar()}" style="display: inline-block"></h3>
+    <h4 th:text="${'Стоянки: '+el.parkingList}"></h4>
+    <hr>
+</div>
+
+</body>
+</html>

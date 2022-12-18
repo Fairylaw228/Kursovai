@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/main.css}">
+    <meta charset="UTF-8">
+    <title>Add</title>
+</head>
+<body>
+<div th:if="${#messages}">
+    <p th:text="${message}"></p>
+</div>
+Регистрация нового пользователя
+<form th:action="${'/kadri/sotrudnikAdd'}" method="post">
+    <div><label> Логин : <input type="text" placeholder="Логин" name="username"/> </label></div>
+    <div><label> Пароль: <input type="password" placeholder="Пароль" name="password"/> </label></div>
+    <div><label> Имя: <input type="text" placeholder="Имя" name="imea"/> </label></div>
+    <div><label> Фамилия: <input type="text" placeholder="Фамилия" name="familiya"/> </label></div>
+    <div><input type="submit" value="Добавить"/></div>
+</form>
+</body>
+
+<style>
+
+
+</style>
+</html>

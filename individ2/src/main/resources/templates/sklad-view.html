@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+
+<a href="/sklad/tovari-add">Добавить товар на склад</a>
+<br>
+<br>
+<a href="/sklad/postavshik">Добавить поставщика</a>
+<a th:href="@{/report}" class="btn btn-success">Скачать отчет по товарам</a>
+
+
+<div th:each="el: ${tovari}">
+    <hr>
+    <img width="300" height="300" class="featured__item_img" th:src="${el.filename}">
+    <br>
+   <label>Количесвто: <h2 th:text="${el.kolichestvo}" class="featured__item_heading"></h2></label>
+    <label>Товар: <h2 th:text="${el.opisanie}" class="featured__item_text"></h2></label>
+    <label>Цена: <h2 class="featured__item_price" th:text="${el.cena}">$</h2></label>
+
+    <form th:action=" '/sklad/' + ${el.id} + '/remove'" method="post">
+        <button type="submit" class="btn btn-del">Удалить</button>
+    </form>
+
+</div>
+
+
+</body>
+
+<style>
+
+    img
+    {
+        background-color: white;
+    }
+
+    input  {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        border-radius: 10px;
+        border: #ffffff;
+        empty-cells:show;
+        margin-left: 10% ;
+        margin-top: 13px;
+        background: #7a7575;
+    }
+    body {
+        font-weight: 400;
+        font-size: 15px;
+        background-image: url(https://abrakadabra.fun/uploads/posts/2022-02/1645660896_19-abrakadabra-fun-p-sklad-fon-33.jpg);
+    }
+    label {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 10px; }
+    message {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 10px;
+    }
+    input::placeholder {
+        color: white;
+    }
+    button {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        border-radius: 10px;
+        border: #ffffff;
+        empty-cells:show;
+        margin-left: 10% ;
+        margin-top: 13px;
+        background: #7a7575;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    button-new:hover {
+        background-color: orange;
+        color: white;
+    }
+
+    button:hover {
+        background: #605df0;
+        color: #ffffff;
+        border: 4px solid #0c2d45;
+        transition: all 0.2s ease;
+    }
+    button-new {
+        background-color: white;
+        color: black;
+        border-radius: 12px;
+        border: 3px solid orange;
+    }
+    p {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 60px;}
+    h1 {
+        position: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 60px;
+    }
+
+    h3 {
+        position: center;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 50px;
+    }
+    a {
+        position: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-top: 50%;
+        margin-left: 100px;
+        text-decoration: none;
+    }
+
+</style>
+
+</html>
+

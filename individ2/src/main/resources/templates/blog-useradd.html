@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <meta charset="UTF-8">
+    <title>Добавление читателя</title>
+</head>
+<body>
+
+<form th:action="${'/blog/usermain/useradd'}" th:object="${user}"  method="post">
+    <hr>
+    <input class="type-1" th:field="*{username}" id="username" type="text" placeholder="Введите Заголовок поста">
+    <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+    <br><br>
+    <input class="type-1" th:field="*{password}" type="password" id="password" name="password" placeholder="Введите Имя поста">
+    <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+    <br><br>
+    <input class="type-1" th:field="*{phone}" type="number" id="phone" name="phone" placeholder="Введите информацию о посте">
+    <td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></td>
+    <br><br>
+    <input class="type-1" th:field="*{checks}" type="number" id="checks" name="checks" placeholder="Введите текст поста">
+    <td th:if="${#fields.hasErrors('checks')}" th:errors="*{checks}"></td>
+    <br><br>
+    <label>Заблокированный
+        <input th:field="*{accesss}" type="radio"  name="accesss" value="0">
+        <span></span>
+    </label>
+
+    <label>Подверждённый
+        <input th:field="*{accesss}" type="radio" id="accesss" name="accesss" value="1">
+        <span></span>
+    </label>
+    <td th:if="${#fields.hasErrors('accesss')}" th:errors="*{accesss}"></td>
+
+
+    <br>
+    <br>
+    <button type="submit">Добавить читателя</button>
+    <hr>
+</form>
+
+<form method="post" th:action="${'/blog/usermain/useradd/result'}">
+    <input class="type-1" type="text" name="login" placeholder="Неточный поиск">
+    <button type="submit">Найти</button>
+    <div th:each="el : ${result}">
+        <hr>
+        <h3 th:text="${el.login}"></h3>
+        <h2 th:text="${el.password}"></h2>
+        <p th:text="${el.phone}"></p>
+        <p th:text="${el.checks}"></p>
+        <p th:text="${el.accesss}"></p>
+        <hr>
+    </div>
+</form>
+
+<form method="post" th:action="${'/blog/usermain/useradd/resultnocon'}">
+    <input class="type-1" type="text" name="login" placeholder="Точный поиск">
+    <button type="submit">Найти</button>
+    <div th:each="el : ${resultnocon}">
+        <hr>
+        <h3 th:text="${el.login}"></h3>
+        <h2 th:text="${el.password}"></h2>
+        <p th:text="${el.phone}"></p>
+        <p th:text="${el.checks}"></p>
+        <p th:text="${el.accesss}"></p>
+        <hr>
+    </div>
+</form>
+</body>
+</html>

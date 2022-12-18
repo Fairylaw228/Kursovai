@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Добро пожаловать</h1>
+<a href="/tovari">Список товаров</a>
+<a href="/contacts">Контактная информация</a>
+<div class="razdel" th:each="el : ${posts}">
+    <hr>
+    <h3 th:text="${el.title}"></h3>
+    <p th:text="${el.anons}"></p>
+    <br>
+    <a th:href=" '/reclam/' + ${el.id}">Подробнее</a>
+    <hr>
+</div>
+</body>
+</html>

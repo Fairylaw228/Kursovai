@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/backup/main.css">
+    <title>БД</title>
+</head>
+
+<body>
+<h1>Управление базой данных</h1>
+<div></div>
+
+<div class="d-flex container flex-row align-items-center justify-content-center mt-3 col-sm-8">
+    <form method="get" th:action="@{/backup/downloadSQL}"
+          class="form-horizontal d-flex flex-row align-items-center justify-content-between col-sm-4">
+        <div class="form-check">
+            <input class="form-check-input" name="withData" type="checkbox" value="1" id="flexCheckChecked" checked>
+            <label class="form-check-label" for="flexCheckChecked">
+                Наличие данных
+            </label>
+        </div>
+        <button type="submit" value="Скачать скрипт" class="btn btn-success margin-left">Скачать скрипт</button>
+    </form>
+    <form method="get" th:action="@{/backup/createDump}"
+          class="form-horizontal d-flex flex-column align-items-center justify-content-center col-sm-4">
+        <button type="submit" value="Создать резервную копию" class="btn btn-success">Создать резервную копию</button>
+    </form>
+</div>
+
+<div class="d-flex flex-row align-items-center justify-content-center mt-3">
+    <form method="post" th:action="@{/backup/upload}" enctype="multipart/form-data"
+          class="form-horizontal d-flex flex-row align-items-center justify-content-center col-sm-4">
+        <input type="file" name="file" class="form-control col-sm-1" accept=".sql">
+        <button type="submit" value="Загрузить резервную копию" class="btn btn-info text-white">Загрузить резервную копию</button>
+    </form>
+</div>
+
+<div class="d-flex flex-column align-items-center justify-content-center mt-3">
+    <div class="col-sm-6">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col" class="text-center">Название</th>
+                <th scope="col" class="text-center">Удалить</th>
+                <th scope="col" class="text-center">Восстановить</th>
+            </tr>
+            </thead>
+            <tr th:each="f : ${restoreFiles}">
+                <form>
+                    <input type="hidden" th:value="${f}" name="filename">
+                    <td scope="col" class="text-center"><span class="h3" th:text="${f}"></span></td>
+                    <td scope="col" class="text-center"><input type="submit" value="Удалить" class="btn btn-danger ml-2"
+                                                               th:formaction="@{/backup/deleteDump}" formmethod="post">
+                    </td>
+                    <td scope="col" class="text-center"><input type="submit" value="Восстановить"
+                                                               th:formaction="@{/backup/restore}" formmethod="post"
+                                                               class="btn btn-primary ml-2"></td>
+                </form>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+
+<style>
+
+    input  {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        border-radius: 10px;
+        border: #ffffff;
+        empty-cells:show;
+        margin-left: 10% ;
+        margin-top: 13px;
+        background: #7a7575;
+    }
+    body {
+        font-weight: 400;
+        font-size: 15px;
+        background-image: url(https://i2.wp.com/wallpapercave.com/wp/wp6988787.png);
+    }
+    label {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 10px; }
+    message {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 10px;
+    }
+    input::placeholder {
+        color: white;
+    }
+    button {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        border-radius: 10px;
+        border: #ffffff;
+        empty-cells:show;
+        margin-left: 10% ;
+        margin-top: 13px;
+        background: #7a7575;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    button-new:hover {
+        background-color: orange;
+        color: white;
+    }
+
+    button:hover {
+        background: #605df0;
+        color: #ffffff;
+        border: 4px solid #0c2d45;
+        transition: all 0.2s ease;
+    }
+    button-new {
+        background-color: white;
+        color: black;
+        border-radius: 12px;
+        border: 3px solid orange;
+    }
+    p {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        text-align: left;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 60px;}
+    h1 {
+        position: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 40px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 60px;
+    }
+
+    h3 {
+        position: center;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-left: 50px;
+    }
+    a {
+        position: center;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        text-align: center;
+        letter-spacing: 0.04em;
+        color: #FFFFFF;
+        margin-top: 50%;
+        margin-left: 100px;
+        text-decoration: none;
+    }
+
+</style>
+
+</html>

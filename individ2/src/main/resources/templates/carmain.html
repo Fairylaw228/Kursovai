@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <meta charset="UTF-8">
+    <title>CarMain</title>
+</head>
+<body>
+<h1>Управление товарами</h1>
+<a href="/blog/carmain/caradd">Создание товара для продажи</a>
+<a href="/blog/carmain/markaadd">Создать производителя</a>
+<a href="/blog/carmain/garageadd">Создание типа товара </a>
+<a href="/blog/carmain/parkingadd">Количество</a>
+
+<!-- <a href="/blog/carmain/car-park">Стоянки</a> -->
+<form th:action="${'/blog/carmain'}" method="post">
+    <div th:each="el : ${cars}">
+        <hr>
+        <h3 th:text="${el.nomer}"></h3>
+        <h3 th:text="${el.namecar}"></h3>
+        <h3 th:text="${el.marka.nameMarka}"></h3>
+        <hr>
+    </div>
+</form >
+
+</body>
+</html>

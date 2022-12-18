@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/main.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+
+
+<form th:action = "${'/blog/carmain/caradd'}" method="post" th:object="${car}">
+  <input type="number" name="nomer" placeholder="Введите серийный номер"><br><br>
+  <input type="text" name="namecar" placeholder="Введите наименование"><br><br>
+  <div>
+    <label>Выберите поставщика</label>
+    <select name="marka_id">
+      <div th:each="rr : ${markas}">
+        <option  th:value="${rr.id}" th:text="${rr.getNameMarka()}" >
+        </option>
+      </div>
+    </select>
+    <div>
+      <label>Выберите производителя</label>
+      <div th:if="${#fields.hasErrors('garage')}" th:errors="*{garage}"></div>
+      <select th:field="*{garage}" name="garage">
+        <option th:each="garage : ${garagess}"
+                th:if="${(car.garage != null && garage.id == car.garage.id) || garage.car == null}"
+                th:value="${garage.id}"
+                th:text="${garage.mesto}">
+        </option>
+      </select>
+    </div>
+  </div>
+  <button type="submit">Добавить товар</button>
+</form>
+
+
+
+</body>
+</html>
+

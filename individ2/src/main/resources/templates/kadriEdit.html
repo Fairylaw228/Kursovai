@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/main.css">
+    <title>Редактирование пользователя</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form th:action="${'/kadri'}" method="post">
+    <div th:each="el : ${user}">
+        <input type="hidden" th:value="${el.id}" name="userId">
+        <label> Логин сотрудника: <input type="text" name="username" placeholder="Введите логин" th:value="${el.username}"></label>
+        <label> Имя: <input type="text" name="imea" placeholder="Введите имя" th:value="${el.imea}"></label>
+        <label> Фамилия: <input type="text" name="familiya" placeholder="Введите фамилию" th:value="${el.familiya}"></label>
+    </div>
+    <div th:each="role : ${roles}">
+        <div th:each="el : ${user}">
+            <input th:id="${role}" type="checkbox" th:name="${'roles[]'}" th:value="${role}"
+                   th:checked="${#lists.contains(el.roles, role)}"/>
+            <label th:text="${role}" /></label>
+        </div>
+    </div>
+    <br>
+    <button type="submit">Сохранить изменения</button>
+</form>
+</body>
+
+<style>
+    body {
+        background-image: url("https://уцпп.рф/wp-content/uploads/2016/12/fons.jpg");
+    }
+
+</style>
+</html>
+
